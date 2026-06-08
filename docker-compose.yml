@@ -84,3 +84,6 @@ volumes:
     driver: local
   netbox-scripts-files:
     driver: local
+networks:                    # NEU
+  coolify:                   # NEU
+    external: true 
