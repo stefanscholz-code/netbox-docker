@@ -5,7 +5,6 @@ services:
       - postgres
       - redis
       - redis-cache
-    env_file: env/netbox.env
     user: "netbox:root"
     healthcheck:
       test: curl -f http://localhost:8080/login/ || exit 1
@@ -41,7 +40,6 @@ services:
       timeout: 30s
       interval: 10s
       retries: 5
-    env_file: env/postgres.env
     volumes:
       - netbox-postgres:/var/lib/postgresql
 
@@ -58,7 +56,6 @@ services:
       timeout: 3s
       interval: 1s
       retries: 5
-    env_file: env/redis.env
     volumes:
       - netbox-redis-data:/data
   redis-cache:
@@ -68,7 +65,6 @@ services:
       - -c # this is to evaluate the $REDIS_PASSWORD from the env
       - valkey-server --requirepass $$REDIS_PASSWORD ## $$ because of docker-compose
     healthcheck: *redis-healthcheck
-    env_file: env/redis-cache.env
     volumes:
       - netbox-redis-cache-data:/data
 
