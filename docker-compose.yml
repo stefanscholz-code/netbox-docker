@@ -19,6 +19,8 @@ services:
     networks:
       - default
       - coolify
+    ports:
+      - '8080:${NETBOX_PORT}'
   netbox-worker:
     <<: *netbox
     depends_on:
